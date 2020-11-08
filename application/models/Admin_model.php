@@ -109,14 +109,12 @@ class Admin_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
-        $password = '123456';
         $data = [
           [
             "admin_nama" => strtoupper("super admin"),
             "admin_username" => strtolower('superadmin'),
             "role_id" => 1,
-            "admin_password" => password_hash($password,PASSWORD_DEFAULT),
+            "admin_password" => password_hash($this->defaultPass,PASSWORD_DEFAULT),
             "created_at"  => date('Y-m-d H:i:s'),
             "updated_at"  => date('Y-m-d H:i:s'),
           ],
@@ -124,7 +122,7 @@ class Admin_model extends CI_Model
             "admin_nama" => strtoupper("admin"),
             "admin_username" => strtolower($this->table),
             "role_id" => 2,
-            "admin_password" => password_hash($password,PASSWORD_DEFAULT),
+            "admin_password" => password_hash($this->defaultPass,PASSWORD_DEFAULT),
             "created_at"  => date('Y-m-d H:i:s'),
             "updated_at"  => date('Y-m-d H:i:s'),
           ],

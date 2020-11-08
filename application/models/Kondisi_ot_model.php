@@ -84,7 +84,6 @@ class Kondisi_ot_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
         $data = [
             ["kondisi_ot_nama" => "BISA MANDIRI"],
             ["kondisi_ot_nama" => "TIDAK BISA MANDIRI"],

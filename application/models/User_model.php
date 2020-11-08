@@ -134,4 +134,29 @@ class User_model extends CI_Model
       }
       return false;
     }
+    function seed()
+    {
+        $data = [
+          [
+            "user_nama" => strtoupper("heraya"),
+            "user_nik" => "3304110701000001",
+            "user_tempat_lahir" => strtoupper("banjarnegara"),
+            "user_tanggal_lahir" => date('Y-m-d',strtotime('07/01/2000')),
+            "user_jk" => "PRIA",
+            "desa" => strtoupper("gelang"),
+            "rt" => strtoupper("02"),
+            "rw" => strtoupper("03"),
+            "kecamatan" => strtoupper("rakit"),
+            "kabupaten" => strtoupper("banjarnegara"),
+            "provinsi" => strtoupper("jawa tengah"),
+            "user_telepon" => "0895378036526",
+            "user_status" => 1,
+            "user_password" => password_hash($this->defaultPass,PASSWORD_DEFAULT),
+            "created_at"  => date('Y-m-d H:i:s'),
+            "updated_at"  => date('Y-m-d H:i:s'),
+          ],
+        ];
+
+        $this->db->insert_batch($this->table, $data);
+    }
 }

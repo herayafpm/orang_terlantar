@@ -84,7 +84,6 @@ class Kebutuhan_diperlukan_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
         $data = [
             ["kebutuhan_diperlukan_nama" => "MAKAN/MINUM"],
             ["kebutuhan_diperlukan_nama" => "BIMBINGAN KONSELING"],

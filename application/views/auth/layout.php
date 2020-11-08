@@ -24,7 +24,6 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      
       <?php $this->load->view($_view) ?>
     </div>
     <!-- /.login-card-body -->

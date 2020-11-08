@@ -1,7 +1,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-body">
-    <?= form_open($_view."/".$_fasilitas_kesehatan['fasilitas_kesehatan_id']); ?>
+    <?= form_open(str_replace("_","",$_view)."/".$_fasilitas_kesehatan['fasilitas_kesehatan_id']); ?>
       <div class="row">
         <div class="col-lg-4">
           <div class="form-group">

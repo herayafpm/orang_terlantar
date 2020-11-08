@@ -84,7 +84,6 @@ class Bansos_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
         $data = [
             ["bansos_nama" => "APBN"],
             ["bansos_nama" => "APBD PROP"],

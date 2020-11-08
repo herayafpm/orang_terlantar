@@ -84,7 +84,6 @@ class Tempat_tinggal_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
         $data = [
             ["tempat_tinggal_nama" => "RUMAH SENDIRI"],
             ["tempat_tinggal_nama" => "NUMPANG"],

@@ -84,7 +84,6 @@ class Kondisi_tempat_tinggal_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
         $data = [
             ["kondisi_tempat_tinggal_nama" => "BAIK"],
             ["kondisi_tempat_tinggal_nama" => "RUSAK RINGAN"],

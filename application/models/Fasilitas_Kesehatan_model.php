@@ -4,7 +4,7 @@
  * www.crudigniter.com
  */
  
-class Fasilitas_Kesehatan_model extends CI_Model
+class Fasilitas_kesehatan_model extends CI_Model
 {
     protected $table = 'fasilitas_kesehatan';
     protected $fasilitas_kesehatan_nama = 'fasilitas_kesehatan_nama';
@@ -84,7 +84,6 @@ class Fasilitas_Kesehatan_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
         $data = [
             ["fasilitas_kesehatan_nama" => "BPJS PBI/KIS PEMERINTAH"],
             ["fasilitas_kesehatan_nama" => "BPJS MANDIRI"],

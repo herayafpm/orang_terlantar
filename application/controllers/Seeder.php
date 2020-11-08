@@ -35,5 +35,8 @@ class Seeder extends CI_Controller
     // OrangTerlantar
     $this->load->model('orang_terlantar_model','OrangTerlantar');
     $this->OrangTerlantar->seed();
+    // User
+    $this->load->model('user_model','User');
+    $this->User->seed();
   }
 }

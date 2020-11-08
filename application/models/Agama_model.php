@@ -32,7 +32,7 @@ class Agama_model extends CI_Model
      */
     function get_agama($agama_id)
     {
-        return $this->db->get_where('agama',array('agama_id'=>$agama_id))->row_array();
+        return $this->db->get_where($this->table,array('agama_id'=>$agama_id))->row_array();
     }
     
     /*
@@ -40,7 +40,7 @@ class Agama_model extends CI_Model
      */
     function get_all_agama_count()
     {
-        $this->db->from('agama');
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
         
@@ -54,7 +54,7 @@ class Agama_model extends CI_Model
         {
             $this->db->limit($params['limit'], $params['offset']);
         }
-        return $this->db->get('agama')->result_array();
+        return $this->db->get($this->table)->result_array();
     }
         
     /*
@@ -62,7 +62,7 @@ class Agama_model extends CI_Model
      */
     function add_agama($params)
     {
-        $this->db->insert('agama',$params);
+        $this->db->insert($this->table,$params);
         return $this->db->insert_id();
     }
     
@@ -72,7 +72,7 @@ class Agama_model extends CI_Model
     function update_agama($agama_id,$params)
     {
         $this->db->where('agama_id',$agama_id);
-        return $this->db->update('agama',$params);
+        return $this->db->update($this->table,$params);
     }
     
     /*
@@ -80,11 +80,10 @@ class Agama_model extends CI_Model
      */
     function delete_agama($agama_id)
     {
-        return $this->db->delete('agama',array('agama_id'=>$agama_id));
+        return $this->db->delete($this->table,array('agama_id'=>$agama_id));
     }
     function seed()
     {
-        $this->db->truncate('agama');
         $data = [
             ["agama_nama" => "Islam"],
             ["agama_nama" => "Protestan"],
@@ -95,6 +94,6 @@ class Agama_model extends CI_Model
             ["agama_nama" => "Tidak Punya"],
         ];
 
-        $this->db->insert_batch('agama', $data);
+        $this->db->insert_batch($this->table, $data);
     }
 }

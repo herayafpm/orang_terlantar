@@ -84,7 +84,6 @@ class Orang_terlantar_model extends CI_Model
     }
     function seed()
     {
-        $this->db->truncate($this->table);
         $data = [
             ["orang_terlantar_nama" => "DALAM DAERAH KAB BANYUMAS"],
             ["orang_terlantar_nama" => "LUAR DAERAH"],
