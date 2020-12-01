@@ -32,11 +32,11 @@ class Migration_Add_admin extends CI_Migration {
         'constraint' => '255'
       ],
       'created_at' => [
-        'type' => 'DATETIME',
+        'type' => 'TIMESTAMP',
         'default' => date('Y-m-d H:i:s')
       ],
       'updated_at' => [
-        'type' => 'DATETIME',
+        'type' => 'TIMESTAMP',
         'default' => date('Y-m-d H:i:s')
       ],
     ));

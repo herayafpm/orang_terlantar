@@ -66,33 +66,45 @@ class Migration_Add_user extends CI_Migration {
         'constraint' => '255',
       ],
       'last_login' => [
-        'type' => 'DATETIME',
-        'default' => date('Y-m-d H:i:s')
+        'type' => 'TIMESTAMP',
+        'null'=> TRUE
       ],
       'user_status' => [
         'type' => 'INT',
         'constraint' => 1,
         'default' => 0
       ],
+      'verif_by' => [
+        'type'     => 'INT',
+        'constraint'=> 11,
+        'unsigned' => TRUE,
+        'null'=> TRUE
+      ],
+      'verif_at' => [
+        'type' => 'TIMESTAMP',
+        'null'=> TRUE
+      ],
       'user_password' => [
         'type' => 'VARCHAR',
         'constraint' => '255'
       ],
       'created_at' => [
-        'type' => 'DATETIME',
+        'type' => 'TIMESTAMP',
         'default' => date('Y-m-d H:i:s')
       ],
       'updated_at' => [
-        'type' => 'DATETIME',
+        'type' => 'TIMESTAMP',
         'default' => date('Y-m-d H:i:s')
       ],
     ));
     $this->dbforge->add_key('user_id', TRUE);
     $this->dbforge->create_table('user');
+    // $this->db->query(add_foreign_key('user', 'verif_by', 'admin(admin_id)'));
   }
 
   public function down()
   {
+    // $this->db->query(drop_foreign_key('user', 'verif_by'));
     $this->dbforge->drop_table('user');
   }
 }

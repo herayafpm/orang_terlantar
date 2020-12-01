@@ -12,6 +12,7 @@
           <tr>
             <th>#</th>
             <th>Nama Admin</th>
+            <th>Username Admin</th>
             <th>Aksi</th>
           </tr>
         </thead>

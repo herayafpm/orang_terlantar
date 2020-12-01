@@ -85,6 +85,7 @@ class Kategori_ot_model extends CI_Model
     function seed()
     {
         $data = [
+            ["kategori_ot_nama" => "BALITA"],
             ["kategori_ot_nama" => "ANAK-ANAK"],
             ["kategori_ot_nama" => "DEWASA"],
             ["kategori_ot_nama" => "LANSIA"],

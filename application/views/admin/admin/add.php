@@ -18,13 +18,6 @@
               <?= form_error('admin_username');?>
             </div>
           </div>
-          <div class="form-group form-check">
-            <input type="checkbox" name="role_id" class="form-check-input <?=(form_error('role_id') != null)?'is-invalid':''?>" id="role_id" value="1" <?= ($this->input->post('role_id') == 1 ? "checked" : ""); ?> >
-            <label class="form-check-label" for="role_id">Super Admin?</label>
-            <div class="invalid-feedback">
-              <?= form_error('admin_username');?>
-            </div>
-          </div>
           <button type="submit" class="btn btn-primary" name='simpan'>Simpan</button>
         </div>
       </div>

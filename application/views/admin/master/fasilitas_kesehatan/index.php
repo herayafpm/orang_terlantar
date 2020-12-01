@@ -2,7 +2,7 @@
 <div class="card">
   <div class="card-header">
     <div class="card-tools">
-      <button type="button" class="btn btn-success" onClick="window.location='<?=base_url(str_replace("_","",'admin/master/fasilitas_kesehatan/add'))?>'">Tambah Fasilitas Kesehatan <i class="fas fa-fw fa-plus"></i></button> 
+      <button type="button" class="btn btn-success" onClick="window.location='<?= base_url(str_replace("_", "", 'admin/master/fasilitaskesehatan/add')) ?>'">Tambah Fasilitas Kesehatan <i class="fas fa-fw fa-plus"></i></button>
     </div>
   </div>
   <div class="card-body">

@@ -1,10 +1,11 @@
 <?php
 class Agama extends MY_admin_controller
 {
-  public function __construct(){
+  public function __construct()
+  {
     parent::__construct();
     $this->isNotSuperAdmin();
-    $this->load->model('agama_model','Agama');
+    $this->load->model('agama_model', 'Agama');
   }
 
   public function index()
@@ -13,14 +14,16 @@ class Agama extends MY_admin_controller
     $data['_title'] = 'Agama';
     $data['_datatable'] = true;
     $data['_datatable_view'] = 'admin/master/agama/datatables';
-    $this->load->view('admin/layout',$data);
+    $data = array_merge($data, $this->data);
+    $this->load->view('admin/template', $data);
   }
-  public function datatables(){
+  public function datatables()
+  {
     try {
       $method = $_SERVER['REQUEST_METHOD'];
-      if($method == 'POST'){
+      if ($method == 'POST') {
         $this->datatable_data($this->Agama);
-      }else{
+      } else {
         throw new Exception("Halaman tidak ditemukkan");
       }
     } catch (Exception $th) {
@@ -32,26 +35,24 @@ class Agama extends MY_admin_controller
     try {
       $data['_view'] = 'admin/master/agama/add';
       $data['_title'] = 'Tambah Agama ';
-      if(isset($_POST['simpan'])){
+      $data = array_merge($data, $this->data);
+      if (isset($_POST['simpan'])) {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('agama_nama','Nama Agama','required');
+        $this->form_validation->set_rules('agama_nama', 'Nama Agama', 'required');
         $this->form_validation->set_message('required', '{field} tidak boleh kosong');
-        if($this->form_validation->run())     
-        {   
+        if ($this->form_validation->run()) {
           $params = [
             'agama_nama' => htmlspecialchars($this->input->post('agama_nama')),
           ];
           $this->Agama->add_agama($params);
-          $this->session->set_flashdata('success',"Berhasil menambah Agama ".$params['agama_nama']);
+          $this->session->set_flashdata('success', "Berhasil menambah Agama " . $params['agama_nama']);
           redirect('admin/master/agama/index');
+        } else {
+          $this->session->set_flashdata('error', 'Validasi Error');
+          $this->load->view('admin/template', $data);
         }
-        else
-        {
-          $this->session->set_flashdata('error','Validasi Error');
-          $this->load->view('admin/layout',$data);
-        }
-      }else{
-        $this->load->view('admin/layout',$data);
+      } else {
+        $this->load->view('admin/template', $data);
       }
     } catch (Exception $th) {
       show_error($th->getMessage());
@@ -62,28 +63,26 @@ class Agama extends MY_admin_controller
     try {
       $agama = $this->Agama->get_agama($id);
       $data['_view'] = 'admin/master/agama/edit';
-      $data['_title'] = 'Edit Agama '.$agama['agama_nama'];
+      $data['_title'] = 'Edit Agama ' . $agama['agama_nama'];
       $data['_agama'] = $agama;
-      if(isset($_POST['simpan'])){
+      $data = array_merge($data, $this->data);
+      if (isset($_POST['simpan'])) {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('agama_nama','Nama Agama','required');
+        $this->form_validation->set_rules('agama_nama', 'Nama Agama', 'required');
         $this->form_validation->set_message('required', '{field} tidak boleh kosong');
-        if($this->form_validation->run())     
-        {   
+        if ($this->form_validation->run()) {
           $params = [
             'agama_nama' => htmlspecialchars($this->input->post('agama_nama')),
           ];
-          $this->Agama->update_agama($id,$params);
-          $this->session->set_flashdata('success','Agama '.$agama['agama_nama']." Berhasil diubah menjadi Agama ".$params['agama_nama']);
+          $this->Agama->update_agama($id, $params);
+          $this->session->set_flashdata('success', 'Agama ' . $agama['agama_nama'] . " Berhasil diubah menjadi Agama " . $params['agama_nama']);
           redirect('admin/master/agama/index');
+        } else {
+          $this->session->set_flashdata('error', 'Validasi Error');
+          $this->load->view('admin/template', $data);
         }
-        else
-        {
-          $this->session->set_flashdata('error','Validasi Error');
-          $this->load->view('admin/layout',$data);
-        }
-      }else{
-        $this->load->view('admin/layout',$data);
+      } else {
+        $this->load->view('admin/template', $data);
       }
     } catch (Exception $th) {
       show_error($th->getMessage());
@@ -93,20 +92,25 @@ class Agama extends MY_admin_controller
   {
     try {
       $method = $_SERVER['REQUEST_METHOD'];
-      if($method == 'POST'){
+      if ($method == 'POST') {
         $agama = $this->Agama->get_agama($id);
-        if($agama){
+        $this->load->model('terlantar_model', 'Terlantar');
+        if ($this->Terlantar->is_using('agama_id', $id)) {
+          $this->session->set_flashdata('error', 'Agama ' . $agama['agama_nama'] . " masih digunakan, tidak bisa dihapus");
+          redirect('admin/master/agama/index');
+        }
+        if ($agama) {
           $delete = $this->Agama->delete_agama($id);
-          if($delete){
-            $this->session->set_flashdata('success','Agama '.$agama['agama_nama']." berhasil dihapus");
-          }else{
-            $this->session->set_flashdata('error','Agama '.$agama['agama_nama']." gagal dihapus");
+          if ($delete) {
+            $this->session->set_flashdata('success', 'Agama ' . $agama['agama_nama'] . " berhasil dihapus");
+          } else {
+            $this->session->set_flashdata('error', 'Agama ' . $agama['agama_nama'] . " gagal dihapus");
           }
           redirect('admin/master/agama/index');
-        }else{
+        } else {
           throw new Exception('Agama tidak ditemukan');
         }
-      }else{
+      } else {
         throw new Exception('Halaman tidak ditemukan');
       }
     } catch (Exception $th) {

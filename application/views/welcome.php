@@ -1,87 +1,93 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
 
-	<style type="text/css">
-
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+	<div class="container-fluid" data-aos="zoom-out" data-aos-delay="100">
+		<div class="row justify-content-center">
+			<div class="col-xl-10">
+				<div class="row">
+					<div class="col-xl-6">
+						<h1>Orang Terlantar</h1>
+						<h2>Aplikasi yang digunakan sebagai inovasi pelayanan publik untuk menangani permasalahan yang dihadapi para orang terlantar di wilayah kabupaten banyumas</h2>
+						<?php if (!isset($this->session->isLogin)) : ?>
+							<a href="<?= base_url('') ?>" class="btn-get-started">Login</a>
+						<?php endif ?>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
+</section><!-- End Hero -->
 
-</body>
-</html>
+<main id="main">
+
+	<!-- ======= Counts Section ======= -->
+	<section id="counts" class="counts">
+		<div class="container" data-aos="fade-up">
+
+			<div class="row justify-content-center">
+
+				<div class="col-lg-3 col-md-6">
+					<div class="count-box">
+						<i class="icofont-people"></i>
+						<span data-toggle="counter-up"><?= $_terdaftar ?></span>
+						<p>Orang Terlantar Terdaftar</p>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+					<div class="count-box">
+						<i class="icofont-verification-check"></i>
+						<span data-toggle="counter-up"><?= $_terverifikasi ?></span>
+						<p>Orang Terlantar Terverifikasi</p>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</section><!-- End Counts Section -->
+
+	<!-- ======= About Section ======= -->
+	<section id="about" class="about section-bg">
+		<div class="container" data-aos="fade-up">
+
+			<div class="row no-gutters">
+				<div class="content col-xl-5 d-flex align-items-stretch">
+					<div class="content">
+						<h3>Langkah - Langkah Pendaftaran Orang Terlantar</h3>
+					</div>
+				</div>
+				<div class="col-xl-7 d-flex align-items-stretch">
+					<div class="icon-boxes d-flex flex-column justify-content-center">
+						<div class="row">
+							<div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+								<i class="bx bx-user"></i>
+								<h4>1. Daftar Akun</h4>
+								<p>Silakan Daftar akun terlebih dahulu untuk dapat mendaftarkan orang terlantar</p>
+							</div>
+							<div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+								<i class="bx bx-log-in"></i>
+								<h4>2. Login Aplikasi</h4>
+								<p>Setelah mendaftar dan diverifikasi oleh Admin Dinsospermades silakan LOGIN</p>
+							</div>
+							<div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+								<i class="bx bx-data"></i>
+								<h4>3. Input Data Orang Terlantar</h4>
+								<p>Input data Orang Terlantar dengan data yang sebenarnya sesuai dengan KTP dan data dukung lainya</p>
+							</div>
+							<div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+								<i class="bx bx-badge-check"></i>
+								<h4>4. Tunggu Diverifikasi</h4>
+								<p>Tunggu hasil verifikasi dari Dinsospermades data usulan orang terlantar yang anda usulkan</p>
+							</div>
+						</div>
+					</div><!-- End .content-->
+				</div>
+			</div>
+
+		</div>
+	</section><!-- End About Section -->
+
+
+</main><!-- End #main -->

@@ -95,7 +95,6 @@ class Kebutuhan_diperlukan_model extends CI_Model
             ["kebutuhan_diperlukan_nama" => "ALAT BANTU KRUK"],
             ["kebutuhan_diperlukan_nama" => "ALAT BANTU KAKI PALSU"],
             ["kebutuhan_diperlukan_nama" => "ALAT BANTU TONGKAT"],
-            ["kebutuhan_diperlukan_nama" => "LAIN-LAIN"],
         ];
 
         $this->db->insert_batch($this->table, $data);

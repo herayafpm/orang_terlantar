@@ -2,7 +2,7 @@
 <div class="card">
   <div class="card-header">
     <div class="card-tools">
-      <button type="button" class="btn btn-success" onClick="window.location='<?=base_url('admin/master/kebutuhan_diperlukan/add')?>'">Tambah Kebutuhan Yang Diperlukan <i class="fas fa-fw fa-plus"></i></button> 
+      <button type="button" class="btn btn-success" onClick="window.location='<?= base_url('admin/master/kebutuhandiperlukan/add') ?>'">Tambah Kebutuhan Yang Diperlukan <i class="fas fa-fw fa-plus"></i></button>
     </div>
   </div>
   <div class="card-body">

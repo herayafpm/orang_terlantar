@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -103,8 +103,11 @@ $db['default'] = array(
 	'port' => '3306',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'terlantar',
 	'dbdriver' => 'mysqli',
+	// 'username' => 'postgres',
+	// 'password' => 'Ray123777',
+	// 'dbdriver' => 'postgre',
+	'database' => 'terlantar',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
@@ -143,4 +146,3 @@ $db['default'] = array(
 // 	'failover' => array(),
 // 	'save_queries' => TRUE
 // );
-
