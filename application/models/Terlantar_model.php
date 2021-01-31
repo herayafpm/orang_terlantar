@@ -403,7 +403,7 @@ class Terlantar_model extends CI_Model
         $desa = ['ajibarang kulon', 'ajibarang wetan', 'banjarkulon', 'banjarmangu', 'gripit', 'ampelsari', 'bakal', 'batur', 'bandingan', 'bawang', 'pucang'];
         $kabupaten = ["banjarnegara", 'banyumas', 'kebumen', 'batang', 'blora', 'boyolali', 'brebes', 'purwodadi', 'jepara'];
         $kecamatan = ['banjarmangu', 'banjarnegara', 'batur', 'bawang', 'kalibening', 'karangkobar', 'ajibarang', 'banyumas', 'baturaden', 'cilongok', 'purwokerto barat', 'purwokerto selatan', 'purwokerto timur'];
-        $jenis = ["PRIA", 'WANITA'];
+        $jenis = ["LAKI - LAKI", 'PEREMPUAN'];
         // for ($loop = 1; $loop <= 5; $loop++) {
 
         // }

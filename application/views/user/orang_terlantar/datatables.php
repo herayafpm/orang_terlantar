@@ -237,6 +237,14 @@
             : <span class="verif-text"></span>
           </div>
         </div>
+        <div class="row verif">
+          <div class="col-4">
+            Keterangan Admin
+          </div>
+          <div class="col">
+            : <span class="keterangan"></span>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -276,6 +284,7 @@
         verif_text = data.sumber_dana_nama + ", " + data.bansos_nama + " " + formatRupiah(data.bansos_total, true)
       }
       $('.verif-text').html(verif_text)
+      $('.keterangan').html(data.keterangan)
     }
     if (data.tolak_id != null) {
       status = '<span class="badge badge-danger"><i class="fa fa-fw fa-times"></i> Ditolak</span>'

@@ -1,4 +1,5 @@
 <?php
+/*
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -192,3 +193,4 @@ class Laporanterlantar extends MY_admin_controller
 		}
 	}
 }
+*/

@@ -13,12 +13,14 @@ class User extends MY_admin_controller
     $data['_title'] = 'Data User';
     if ($status == 0) {
       $data['_title'] = $data['_title'] . " Belum Diverifikasi";
-    } else {
+    } else if ($status == 1) {
       $data['_title'] = $data['_title'] . " Sudah Diverifikasi";
+    } else {
+      $data['_title'] = $data['_title'] . " Ditolak";
     }
     $data['_datatable'] = true;
     $data['_datatable_view'] = 'admin/user/datatables';
-    $data['_datatable_scroll_y'] = "200px";
+    $data['_datatable_scroll_y'] = "400px";
     $data['_admin'] = $this->admin;
     $data['_status'] = $status;
     $data['_desas'] = json_encode($this->User->get_distinct_user('desa'));
@@ -165,7 +167,7 @@ class User extends MY_admin_controller
       show_error($th->getMessage());
     }
   }
-  public function delete($id)
+  public function tolak($id)
   {
     try {
       $method = $_SERVER['REQUEST_METHOD'];
@@ -173,15 +175,17 @@ class User extends MY_admin_controller
         $user = $this->User->get_user($id);
         $this->load->model('terlantar_model', 'Terlantar');
         if ($this->Terlantar->is_using('user_daftar', $id)) {
-          $this->session->set_flashdata('error', 'User ' . $user['user_nama'] . " masih digunakan, tidak bisa dihapus");
+          $this->session->set_flashdata('error', 'User ' . $user['user_nama'] . " masih digunakan, tidak bisa ditolak");
           redirect_back();
         }
         if ($user) {
-          $delete = $this->User->delete_user($id);
-          if ($delete) {
-            $this->session->set_flashdata('success', 'user ' . $user['user_nama'] . " berhasil dihapus");
+          $params['verif_by'] = $this->admin['admin_id'];
+          $params['verif_at'] = date('Y-m-d H:i:s');
+          $update = $this->User->tolak_user($id, 2, $params);
+          if ($update) {
+            $this->session->set_flashdata('success', 'user ' . $user['user_nama'] . " berhasil ditolak");
           } else {
-            $this->session->set_flashdata('error', 'user ' . $user['user_nama'] . " gagal dihapus");
+            $this->session->set_flashdata('error', 'user ' . $user['user_nama'] . " gagal ditolak");
           }
           redirect_back();
         } else {

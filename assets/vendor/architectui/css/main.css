@@ -11064,9 +11064,9 @@
  }
 
  .app-header__logo .logo-src {
- 	height: 23px;
- 	width: 97px;
- 	background: url(/assets/vendor/architectui/images/logo-inverse.png)
+ 	/* height: 23px;
+ 	width: 97px; */
+ 	/* background: url(/assets/vendor/architectui/images/logo-inverse.png) */
  }
 
  .app-header__menu,
@@ -11192,7 +11192,7 @@
  }
 
  .app-header.header-text-light .app-header__logo .logo-src {
- 	background: url(/assets/vendor/architectui/images/logo.png)
+ 	/* background: url(/assets/vendor/architectui/images/logo.png) */
  }
 
  .app-header.header-text-light .app-header__mobile-menu .hamburger-inner,
@@ -11290,7 +11290,7 @@
  }
 
  .app-header.header-text-dark .app-header__logo .logo-src {
- 	background: url(/assets/vendor/architectui/images/logo-inverse.png)
+ 	/* background: url(/assets/vendor/architectui/images/logo-inverse.png) */
  }
 
  .app-sidebar {
@@ -11569,7 +11569,7 @@
  }
 
  .app-sidebar.sidebar-text-light .app-header__logo .logo-src {
- 	background: url(assets/images/logo.png)
+ 	/* background: url(assets/images/logo.png) */
  }
 
  .app-sidebar.sidebar-text-light .app-header__logo .hamburger-inner,

@@ -8,29 +8,30 @@
       </div>
     </div>
     <div class="card-body">
+      <h4>Filter</h4>
+      <div class="row">
+        <div class="col-md-3 mb-1 filtered">#</div>
+        <div class="col-md-3 mb-1 filtered">Nama</div>
+        <div class="col-md-3 mb-1 filtered">NIK</div>
+        <div class="col-md-3 mb-1 filtered">NO KK</div>
+        <div class="col-md-3 mb-1 filtered">Desa</div>
+        <div class="col-md-3 mb-1 filtered">Kecamatan</div>
+        <div class="col-md-3 mb-1 filtered">Kabupaten</div>
+        <div class="col-md-3 mb-1 filtered">Pendaftar</div>
+        <div class="col-md-3 mb-1 filtered">Tempat Tinggal</div>
+        <div class="col-md-3 mb-1 filtered">Kondisi Tempat Tinggal</div>
+        <div class="col-md-3 mb-1 filtered">Kategori OT</div>
+        <div class="col-md-3 mb-1 filtered">Fasilitas Kesehatan OT</div>
+        <div class="col-md-3 mb-1 filtered">Kondisi OT</div>
+        <div class="col-md-3 mb-1 filtered">Kebutuhan</div>
+        <div class="col-md-3 mb-1 filtered">Ditolak Oleh</div>
+        <div class="col-md-3 mb-1 filtered">Ditolak</div>
+        <div class="col-md-3 mb-1 filtered">Diajukan</div>
+        <div class="col-md-3 mb-1 filtered">Aksi</div>
+      </div>
       <div class="table-responsive">
         <table class="table table-sm table-hover table-stripped display no-wrap" id="datatable">
           <thead>
-            <tr>
-              <th class="filtered">#</th>
-              <th class="filtered">Nama</th>
-              <th class="filtered">NIK</th>
-              <th class="filtered">NO KK</th>
-              <th class="filtered">Desa</th>
-              <th class="filtered">Kecamatan</th>
-              <th class="filtered">Kabupaten</th>
-              <th class="filtered">Pendaftar</th>
-              <th class="filtered">Tempat Tinggal</th>
-              <th class="filtered">Kondisi Tempat Tinggal</th>
-              <th class="filtered">Kategori OT</th>
-              <th class="filtered">FasKes OT</th>
-              <th class="filtered">Kondisi OT</th>
-              <th class="filtered">Kebutuhan</th>
-              <th class="filtered">Ditolak Oleh</th>
-              <th class="filtered">Ditolak</th>
-              <th class="filtered">Diajukan</th>
-              <th class="filtered">Aksi</th>
-            </tr>
             <tr>
               <th>#</th>
               <th>Nama</th>

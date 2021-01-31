@@ -60,7 +60,7 @@
   <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
     <div class="app-header header-shadow bg-info header-text-dark">
       <div class="app-header__logo">
-        <div class="logo-src"></div>
+        <div class="logo-src" style="font-size: 18px;color: rgba(0, 0, 0, 1);"><?= APP_NAME ?></div>
         <div class="header__pane ml-auto">
           <div>
             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -239,6 +239,12 @@
                 <a href="<?= base_url('admin/user/data/1') ?>" class="<?= ($uri == 'admin/user/data/1') ? 'mm-active' : '' ?>">
                   <i class="metismenu-icon pe-7s-users"></i>
                   User Sudah Diverifikasi
+                </a>
+              </li>
+              <li>
+                <a href="<?= base_url('admin/user/data/2') ?>" class="<?= ($uri == 'admin/user/data/2') ? 'mm-active' : '' ?>">
+                  <i class="metismenu-icon pe-7s-users"></i>
+                  User Ditolak
                 </a>
               </li>
               <?php

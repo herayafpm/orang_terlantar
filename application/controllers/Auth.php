@@ -33,14 +33,16 @@ class Auth extends CI_Controller
           ];
           $authUser = $this->User->authenticate($paramsUser);
           if ($authUser) {
-            if ((bool)$authUser['user_status']) {
+            if ($authUser['user_status'] == 1) {
               $authUser['isLogin'] = true;
               $this->session->set_userdata($authUser);
               $this->load->model('login_user_model', 'LoginUser');
               $this->LoginUser->add_login_user(['user_id' => $authUser['user_id']]);
               echo json_encode(['status' => 1, 'message' => 'Berhasil Login', "data" => ["to" => base_url('')]]); // Convert array $callback ke json
-            } else {
+            } else if ($authUser['user_status'] == 0) {
               echo json_encode(['status' => 0, 'message' => 'Akun ini masih belum aktif, harap kontak admin', "data" => []]); // Convert array $callback ke json
+            } else {
+              echo json_encode(['status' => 0, 'message' => 'Akun ini ditolak oleh admin, silahkan lakukan registrasi ulang', "data" => []]); // Convert array $callback ke json
             }
           } else {
             echo json_encode(['status' => 0, 'message' => 'Username atau password salah', "data" => []]); // Convert array $callback ke json
@@ -115,6 +117,17 @@ class Auth extends CI_Controller
       return false;
     }
   }
+  function cek_user_nik($str)
+  {
+    $user = $this->User->get_user_by_nik($str);
+    if ($user['user_status'] == 2) {
+      return true;
+    }
+    if (!$user) {
+      return true;
+    }
+    return false;
+  }
   public function register()
   {
     try {
@@ -123,7 +136,7 @@ class Auth extends CI_Controller
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('nik', 'NIK', 'required|is_unique[user.user_nik]|min_length[16]|max_length[16]');
+        $this->form_validation->set_rules('nik', 'NIK', 'required|callback_cek_user_nik|min_length[16]|max_length[16]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
         $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
         $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required');
@@ -136,6 +149,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('provinsi', 'Provinsi', 'required');
         $this->form_validation->set_message('required', '{field} tidak boleh kosong');
         $this->form_validation->set_message('cek_jk', 'harus pilih {field}');
+        $this->form_validation->set_message('cek_user_nik', '{field} sudah digunakan');
         $this->form_validation->set_message('is_unique', '{field} sudah digunakan');
         $this->form_validation->set_message('min_length', '{field} harus sama dengan {param} karakter');
         $this->form_validation->set_message('max_length', '{field} harus sama dengan {param} karakter');
@@ -156,7 +170,14 @@ class Auth extends CI_Controller
             'user_telepon' => htmlspecialchars($this->input->post('no_telp')),
             'user_password' => htmlspecialchars($this->input->post('password')),
           ];
-          $this->User->add_user($params);
+          $user = $this->User->get_user_by_nik($params['user_nik']);
+          if (!$user) {
+            $this->User->add_user($params);
+          } else {
+            $params['verif_by'] = null;
+            $params['verif_at'] = null;
+            $update = $this->User->tolak_user($user['user_id'], 0, $params);
+          }
           echo json_encode(['status' => 1, 'message' => 'Berhasil mendaftar, silahkan tunggu admin untuk memverifikasi', "data" => ["to" => base_url('auth')]]);
         } else {
           echo json_encode(['status' => 0, 'message' => validation_errors(), "data" => []]);

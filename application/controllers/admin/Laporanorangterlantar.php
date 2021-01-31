@@ -38,7 +38,7 @@ class Laporanorangterlantar extends MY_admin_controller
       $data['_admin'] = $this->admin;
       $data['_status'] = $status;
       $data['_id'] = $id;
-      $data['_datatable_scroll_y'] = "200px";
+      $data['_datatable_scroll_y'] = "400px";
       $data['_desas'] = json_encode($this->Terlantar->get_distinct_terlantar('terlantar_desa'));
       $data['_kecamatans'] = json_encode($this->Terlantar->get_distinct_terlantar('terlantar_kecamatan'));
       $data['_kabupatens'] = json_encode($this->Terlantar->get_distinct_terlantar('terlantar_kabupaten'));
@@ -189,7 +189,7 @@ class Laporanorangterlantar extends MY_admin_controller
       $sheet->setCellValue('V1', 'TUJUAN PERJALANAN');
       $sheet->setCellValue('W1', 'PEMBERI BANTUAN');
       $sheet->setCellValue('X1', 'KETERANGAN');
-      $sheet->setCellValue('Z1', 'DIAJUKAN PADA');
+      $sheet->setCellValue('Y1', 'DIAJUKAN PADA');
       $terlantars = [];
       $filename = 'Laporan Semua Orang Terlantar';
       $terlantars = $this->Terlantar->filter(null, null, null, null, null, $params);
@@ -221,7 +221,7 @@ class Laporanorangterlantar extends MY_admin_controller
         $sheet->setCellValue('V' . $x, $terlantar['tujuan_alamat']);
         $sheet->setCellValue('W' . $x, ($terlantar['sumber_dana_id'] != null) ? $terlantar['sumber_dana_nama'] : "Tidak Ada");
         $sheet->setCellValue('X' . $x, $terlantar['keterangan']);
-        $sheet->setCellValue('Z' . $x, $terlantar['created_at']);
+        $sheet->setCellValue('Y' . $x, $terlantar['created_at']);
         $x++;
       }
       $writer = new Xlsx($spreadsheet);

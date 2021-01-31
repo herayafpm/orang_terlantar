@@ -495,6 +495,9 @@
             });
         }).draw();
         $('.filtered').each(function(i) {
+            if (i == 0 || i == 7 || i == 14 || i == 15) {
+                $(this).removeClass('col-md-3')
+            }
             var title = $(this).text();
             if (i == 1 || i == 2 || i == 3) {
                 var input = $('<input class="form-control form-control-sm" type="text" placeholder="' + title + '"/>').appendTo($(this).empty());
@@ -584,22 +587,29 @@
                     })
                 }
             } else if (i == 16) {
-                var daterange = '<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"><i class="fa fa-calendar"></i>&nbsp;<span></span> <i class="fa fa-caret-down"></i></div>';
+                var daterange = '<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"><i class="fa fa-calendar"></i>&nbsp;<span>Pilih Tanggal</span> <i class="fa fa-caret-down"></i></div>';
                 $(this).empty().append(daterange);
             } else {
                 $(this).empty();
             }
         });
 
+        start = moment();
+        end = moment();
+
         function cb(start, end) {
             date = start.format('YYYY-MM-D') + '/' + end.format('YYYY-MM-D');
             $('.date-text').html("Data Dari tanggal " + start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'))
-            tabel.ajax.reload(null, false)
+            tabel.ajax.reload(function(json) {
+                datas = json.data
+            })
         }
 
         $('#reportrange').daterangepicker({
             showDropdowns: true,
             autoApply: false,
+            startDate: start,
+            endDate: end,
             locale: {
                 customRangeLabel: 'Tentukan Sendiri',
                 cancelLabel: 'Batal',
@@ -613,14 +623,17 @@
                 'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
                 'Bulan sebelumnya': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             }
-        });
+        }, cb);
+        cb(start, end)
         $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
             cb(picker.startDate, picker.endDate)
         })
         $('.refreshData').on('click', function() {
             date = null;
             $('.date-text').html("Semua Data");
-            tabel.ajax.reload(null, false)
+            tabel.ajax.reload(function(json) {
+                datas = json.data
+            })
         })
     });
 </script>

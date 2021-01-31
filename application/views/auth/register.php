@@ -27,10 +27,10 @@
 				</div>
 				<div class="row form-group">
 					<div class="col-md-12">
-						<select class="form-control w-100 jenis_kelamin-control select2" name="jenis_kelamin" style="width:100%;font-size: 15px">
+						<select class="form-control w-100 jenis_kelamin-control select2" name="jenis_kelamin" id="jenis_kelamin" style="width:100%;font-size: 15px">
 							<option value="">- - - Jenis Kelamin - - -</option>
-							<option value="PRIA" <?= ($this->input->post('jenis_kelamin') == "PRIA") ? 'selected' : '' ?>>PRIA</option>
-							<option value="WANITA" <?= ($this->input->post('jenis_kelamin') == "WANITA") ? 'selected' : '' ?>>WANITA</option>
+							<option value="LAKI - LAKI" <?= ($this->input->post('jenis_kelamin') == "LAKI - LAKI") ? 'selected' : '' ?>>LAKI - LAKI</option>
+							<option value="PEREMPUAN" <?= ($this->input->post('jenis_kelamin') == "PEREMPUAN") ? 'selected' : '' ?>>PEREMPUAN</option>
 						</select>
 						<div class="text-danger validate"></div>
 					</div>

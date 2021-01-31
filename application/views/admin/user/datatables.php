@@ -22,6 +22,14 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
+                        Nama Lengkap
+                    </div>
+                    <div class="col">
+                        : <span class="user_nama"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
                         Tempat, Tanggal Lahir
                     </div>
                     <div class="col">
@@ -108,6 +116,14 @@
                         : <span class="verif-text"></span>
                     </div>
                 </div>
+                <div class="row tolak">
+                    <div class="col-4">
+                        Ditolak
+                    </div>
+                    <div class="col">
+                        : <span class="tolak-text"></span>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -131,11 +147,11 @@
 
 
 
-    function deleteData(id) {
-        var cek = confirm('Yakin ingin menghapus data ini?');
+    function tolakData(id) {
+        var cek = confirm('Yakin ingin menolak data ini?');
         if (cek) {
-            $('.deleteData').attr('action', "<?= base_url('admin/user/delete/') ?>" + id)
-            $('.deleteData').submit();
+            $('.tolakData').attr('action', "<?= base_url('admin/user/tolak/') ?>" + id)
+            $('.tolakData').submit();
         }
     }
 
@@ -161,6 +177,7 @@
 
     function showData(index) {
         $('.verif').addClass('d-none');
+        $('.tolak').addClass('d-none');
         $('.detailModal').click()
         var data = datas[index]
         var status = '<span class="badge badge-info"><i class="fa fa-fw fa-clock"></i> DiProses</span>'
@@ -169,8 +186,14 @@
             status = '<span class="badge badge-success"><i class="fa fa-fw fa-check"></i> Diverifikasi</span>'
             $('.verif-text').html('Diverifikasi Oleh ' + data.admin_nama + ' Pada ' + toLocaleDate(data.verif_at, "LLLL"))
         }
+        if (data.user_status == 2) {
+            $('.tolak').removeClass('d-none');
+            status = '<span class="badge badge-danger"><i class="fa fa-fw fa-times"></i> Ditolak</span>'
+            $('.tolak-text').html('Ditolak Oleh ' + data.admin_nama + ' Pada ' + toLocaleDate(data.verif_at, "LLLL"))
+        }
         $('#detailModalLabel').html('Detail User ' + data.user_nama + " " + status)
         $('.user_nik').html(data.user_nik)
+        $('.user_nama').html(data.user_nama)
         $('.user_tempat_lahir').html(data.user_tempat_lahir)
         $('.user_tanggal_lahir').html(toLocaleDate(data.user_tanggal_lahir, 'LL'))
         $('.last_login').html(toLocaleDate(data.last_login, 'LLLL'))
@@ -258,12 +281,12 @@
                             classBadge = "badge-info";
                             textLog = '<i class="fa fa-fw fa-clock"></i> Catatan Login'
                             html += '<button type="button" class="btn btn-sm" onClick="logData(' + row.user_id + ')"><div class="mb-2 mr-2 badge ' + classBadge + '">' + textLog + '</div></button>'
-                        } else {
+                        } else if (row.user_status == 0) {
                             classBadge = "badge-success";
                             textVerif = '<i class="fa fa-fw fa-check"></i> Verif'
                             html += '<form method="POST" class="verifData float-left"><button type="button" class="btn btn-sm" onClick="verifData(' + row.user_id + ')"><div class="mb-2 mr-2 badge ' + classBadge + '">' + textVerif + '</div></button></form>'
+                            html += '<form method="POST" class="tolakData float-left"><button type="button" class="btn btn-sm" onClick="tolakData(' + row.user_id + ')"><div class="mb-2 mr-2 badge badge-danger"><i class="fa fa-fw fa-times"></i> Tolak</div></form>'
                         }
-                        html += '<form method="POST" class="deleteData float-left"><button type="button" class="btn btn-sm" onClick="deleteData(' + row.user_id + ')"><div class="mb-2 mr-2 badge badge-danger"><i class="fa fa-fw fa-trash"></i> Hapus</div></form>'
                         return html
                     }
                 },
@@ -278,6 +301,9 @@
             });
         }).draw();
         $('.filtered').each(function(i) {
+            if (i == 0) {
+                $(this).removeClass("col-md-3")
+            }
             var title = $(this).text();
             if (i >= 1 && i <= 2) {
                 var input = $('<input class="form-control form-control-sm" type="text" placeholder="' + title + '"/>').appendTo($(this).empty());
@@ -292,10 +318,12 @@
                     if (i == 2) {
                         nik = term;
                     }
-                    tabel.ajax.reload(null, false)
+                    tabel.ajax.reload(function(json) {
+                        datas = json.data
+                    })
                 });
             } else if (i >= 3 && i <= 5) {
-                var select = $('<select><option class="form-control form-control-sm" value="">-- Pilih ' + title + ' --</option></select>').appendTo($(this).empty()).on('change', function() {
+                var select = $('<select class="form-control form-control-sm"><option value="">-- Pilih ' + title + ' --</option></select>').appendTo($(this).empty()).on('change', function() {
                     var term = $(this).val();
                     if (i == 3) {
                         desa = term
@@ -306,7 +334,9 @@
                     if (i == 5) {
                         kabupaten = term
                     }
-                    tabel.ajax.reload(null, false)
+                    tabel.ajax.reload(function(json) {
+                        datas = json.data
+                    })
                 });
                 var options = []
                 if (i == 3) {
@@ -322,22 +352,28 @@
                     select.append('<option value="' + d.nama + '">' + d.nama + '</option>')
                 })
             } else if (i == 6) {
-                var daterange = '<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"><i class="fa fa-calendar"></i>&nbsp;<span></span> <i class="fa fa-caret-down"></i></div>';
+                var daterange = '<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"><i class="fa fa-calendar"></i>&nbsp;<span>Pilih Tanggal</span> <i class="fa fa-caret-down"></i></div>';
                 $(this).empty().append(daterange);
             } else {
                 $(this).empty();
             }
         });
+        start = moment();
+        end = moment();
 
         function cb(start, end) {
             date = start.format('YYYY-MM-D') + '/' + end.format('YYYY-MM-D');
             $('.date-text').html("Data Dari tanggal " + start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'))
-            tabel.ajax.reload(null, false)
+            tabel.ajax.reload(function(json) {
+                datas = json.data
+            })
         }
 
         $('#reportrange').daterangepicker({
             showDropdowns: true,
             autoApply: false,
+            startDate: start,
+            endDate: end,
             locale: {
                 customRangeLabel: 'Tentukan Sendiri',
                 cancelLabel: 'Batal',
@@ -351,14 +387,17 @@
                 'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
                 'Bulan sebelumnya': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             }
-        });
+        }, cb);
+        cb(start, end)
         $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
             cb(picker.startDate, picker.endDate)
         })
         $('.refreshData').on('click', function() {
             date = null;
             $('.date-text').html("Semua Data");
-            tabel.ajax.reload(null, false)
+            tabel.ajax.reload(function(json) {
+                datas = json.data
+            })
         })
     });
 </script>

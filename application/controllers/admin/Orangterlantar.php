@@ -33,7 +33,7 @@ class Orangterlantar extends MY_admin_controller
       $data['_admin'] = $this->admin;
       $data['_status'] = $status;
       $data['_id'] = $id;
-      $data['_datatable_scroll_y'] = "200px";
+      $data['_datatable_scroll_y'] = "400px";
       $data['_desas'] = json_encode($this->Terlantar->get_distinct_terlantar('terlantar_desa'));
       $data['_kecamatans'] = json_encode($this->Terlantar->get_distinct_terlantar('terlantar_kecamatan'));
       $data['_kabupatens'] = json_encode($this->Terlantar->get_distinct_terlantar('terlantar_kabupaten'));

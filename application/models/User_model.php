@@ -172,6 +172,17 @@ class User_model extends CI_Model
   {
     return $this->db->delete($this->table, array('user_id' => $user_id));
   }
+  function tolak_user($user_id, $status, $params)
+  {
+    $params['user_status'] = $status;
+    $this->db->where('user_id', $user_id);
+    if (isset($params['user_password'])) {
+      $params['user_password'] = password_hash($params['user_password'], PASSWORD_DEFAULT);
+    }
+    $params['created_at'] = date('Y-m-d H:i:s');
+    $params['updated_at'] = date('Y-m-d H:i:s');
+    return $this->db->update($this->table, $params);
+  }
   function authenticate($params)
   {
     if (empty($params['user_nik']) || empty($params['user_password'])) {
@@ -268,7 +279,7 @@ class User_model extends CI_Model
     $desa = ['ajibarang kulon', 'ajibarang wetan', 'banjarkulon', 'banjarmangu', 'gripit', 'ampelsari', 'bakal', 'batur', 'bandingan', 'bawang', 'pucang'];
     $kabupaten = ["banjarnegara", 'banyumas', 'kebumen', 'batang', 'blora', 'boyolali', 'brebes', 'purwodadi', 'jepara'];
     $kecamatan = ['banjarmangu', 'banjarnegara', 'batur', 'bawang', 'kalibening', 'karangkobar', 'ajibarang', 'banyumas', 'baturaden', 'cilongok', 'purwokerto barat', 'purwokerto selatan', 'purwokerto timur'];
-    $jenis = ["PRIA", 'WANITA'];
+    $jenis = ["LAKI - LAKI", 'PEREMPUAN'];
     $data = [];
     $start = strtotime("2020-01-01");
     for ($i = 1; $i <= 100; $i++) {

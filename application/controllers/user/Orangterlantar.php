@@ -52,11 +52,11 @@ class Orangterlantar extends MY_user_controller
     $data['_jenis_kelamins'] = [
       [
         'id' => '1',
-        'nama' => 'PRIA'
+        'nama' => 'LAKI - LAKI'
       ],
       [
         'id' => '2',
-        'nama' => 'WANITA'
+        'nama' => 'PEREMPUAN'
       ],
     ];
     $data['_have_identitass'] = [
@@ -208,11 +208,11 @@ class Orangterlantar extends MY_user_controller
         $data['_jenis_kelamins'] = [
           [
             'id' => '1',
-            'nama' => 'PRIA'
+            'nama' => 'LAKI - LAKI'
           ],
           [
             'id' => '2',
-            'nama' => 'WANITA'
+            'nama' => 'PEREMPUAN'
           ],
         ];
         $data['_have_identitass'] = [
