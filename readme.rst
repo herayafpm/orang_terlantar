@@ -60,6 +60,19 @@ Instalasi
 
 4. selesai
 
+************
+Akun
+************
+
+1. Akun Superadmin
+- Username: superadmin
+- Password: 123456 
+
+2. Akun Admin Verifikasi
+- Username: admin
+- Password: 123456
+
+
 *******
 Lisensi
 *******
